@@ -1,3 +1,3 @@
-module github.com/KOROYED/Go-Web-Course
+module lenslocked.go
 
 go 1.20
