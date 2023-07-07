@@ -6,9 +6,15 @@ import (
 )
 
 type User struct {
-	Name string
-	Bio  string
-	Age  int
+	Name        string
+	Bio         string
+	Age         int
+	AccessCodes []int
+	Secret      HiddenData
+}
+
+type HiddenData struct {
+	Password string
 }
 
 func main() {
@@ -18,9 +24,12 @@ func main() {
 	}
 
 	user := User{
-		Name: "Jon Calhoun",
-		Bio:  `<script>alert("Haha, you have been h4x0r3d");</script>`,
-		Age:  123,
+		Bio:         `<script>alert("Haha, you have been h4x0r3d");</script>`,
+		Age:         123,
+		AccessCodes: []int{1, 2, 3, 4},
+		Secret: HiddenData{
+			Password: "bibon",
+		},
 	}
 
 	err = t.Execute(os.Stdout, user)
