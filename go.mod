@@ -1,4 +1,4 @@
-module lenslocked
+module github.com/KOROYED/lenslocked
 
 go 1.21.0
 
