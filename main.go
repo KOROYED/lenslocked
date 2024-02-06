@@ -10,6 +10,7 @@ import (
 	"github.com/KOROYED/lenslocked/views"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/gorilla/csrf"
 )
 
 func main() {
@@ -67,6 +68,12 @@ func main() {
 		http.Error(w, "Page not found", http.StatusNotFound)
 	})
 
+	csrfKey := "gFvi45R4fy5xNBlnEeZtQbfAVCYEIAUX"
+	csrfMw := csrf.Protect(
+		[]byte(csrfKey),
+		//TODO: FIX THIS BEFORE DEPLOYING
+		csrf.Secure(false))
+
 	fmt.Println("Starting the server on :3000...")
-	http.ListenAndServe(":3000", r)
+	http.ListenAndServe(":3000", csrfMw(r))
 }
